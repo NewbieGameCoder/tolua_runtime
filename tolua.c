@@ -1482,8 +1482,8 @@ static int tolua_lazyclosure(lua_State *L)
 		return luaL_error(L, "LazyFunction(%s) Doesn't Exist In %s", funcName, hostName);
 	}
 
-	lua_pushvalue(L, lua_upvalueindex(4));// push key
-	lua_pushvalue(L, lua_upvalueindex(5));// push lazyStatus
+	//lua_pushvalue(L, lua_upvalueindex(4));// push key
+	//lua_pushvalue(L, lua_upvalueindex(5));// push lazyStatus
 	int r = fn(L);
 	lua_pushboolean(L, 0);
 	lua_replace(L, lua_upvalueindex(5));
@@ -1653,9 +1653,9 @@ static int tolua_lazyVariableClosure(lua_State *L)
 		return luaL_error(L, "LazyFunction(%s) Doesn't Exist In %s", funcName, hostName);
 	}
 
-	lua_pushvalue(L, lua_upvalueindex(4));// push key
-	lua_pushvalue(L, lua_upvalueindex(5));// push lazyStatus
-	lua_pushvalue(L, lua_upvalueindex(6));// push getStatus
+	//lua_pushvalue(L, lua_upvalueindex(4));// push key
+	//lua_pushvalue(L, lua_upvalueindex(5));// push lazyStatus
+	//lua_pushvalue(L, lua_upvalueindex(6));// push getStatus
 	int r = fn(L);
 	lua_pushboolean(L, 0);
 	lua_replace(L, lua_upvalueindex(5));
