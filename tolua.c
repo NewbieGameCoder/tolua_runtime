@@ -1425,6 +1425,27 @@ LUALIB_API void tolua_function(lua_State *L, const char *name, lua_CFunction fn)
     lua_rawset(L, -3);*/
 }
 
+#if LUA_VERSION_NUM == 501
+LUALIB_API void tolua_bind_enum_equal(lua_State *L, lua_CFunction fn)
+{
+    lua_pushglobaltable(L);                                   //stack _G
+  	lua_pushstring(L, "__$enum_equal_func");
+    tolua_pushcfunction(L, fn);
+    lua_rawset(L, -3);
+    lua_pop(L, 1);
+}
+
+LUALIB_API void tolua_push_enum_equal(lua_State *L, const char *name)
+{
+  	lua_pushstring(L, name);
+    lua_pushglobaltable(L);                                   //stack _G
+    lua_pushstring(L, "__$enum_equal_func");
+    lua_rawget(L, -2);
+    lua_remove(L, -2);
+  	lua_rawset(L, -3);
+}
+#endif
+
 LUALIB_API void tolua_variable(lua_State *L, const char *name, lua_CFunction get, lua_CFunction set)
 {                
     lua_pushlightuserdata(L, &gettag);
